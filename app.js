@@ -7,11 +7,9 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var csrf = require('csurf');
-var mongoStore = require('connect-mongo');
 var mongoose = require('mongoose');
 var conf = require('./config/settings');
 var fs = require('fs');
-
 
 var app = express();
 
@@ -58,6 +56,13 @@ fs.readdirSync(__dirname + '/models').forEach(function (file) {
   if (~file.indexOf('.js')) require(__dirname + '/models/' + file);
 });
 
+
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+app.use('/', routes);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

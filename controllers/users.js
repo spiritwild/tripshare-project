@@ -5,7 +5,7 @@ var utils = require('../libs/utils');
 exports.register = register;
 
 function register(req, res) {
-  var user = {
+  var user = new User({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
@@ -14,6 +14,18 @@ function register(req, res) {
     address: req.body.address,
     id_card: req.body.id_card,
     phone: req.body.phone
-  };
-  res.send(JSON.stringify(user));
+  });
+  user.save(function (err) {
+    if (err) {
+      return res.render('users/register', {
+        error: utils.errors(err.errors),
+        user: user,
+        title: "Register"
+      })
+    }
+    req.logIn(user, function (err) {
+      if (err) req.flash('info', 'Sorry! We are not able to log you in!');
+      return res.redirect('/');
+    });
+  })
 }
