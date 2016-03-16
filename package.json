@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -L ./bin/www --harmony"
+    "start": "nodemon -L server.js --harmony"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -21,6 +21,8 @@
     "cookie-session": "1.2.0",
     "connect-mongo": "~1.1.0",
     "nconf": "^0.8.2",
-    "passport-local": "~1.0.0"
+    "passport-local": "~1.0.0",
+    "winston": "~2.2.0",
+    "connect-flash": "~0.1.1"
   }
 }

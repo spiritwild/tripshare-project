@@ -11,7 +11,8 @@ var UserSchema = new Schema({
   address: {type: String, default: ''},
   idCard: {type: String, default: ''},
   dob: {type: String, default: ''},
-  phone: {type: String, default: ''}
+  phone: {type: String, default: ''},
+  salt: {type: String, default: ""}
 });
 
 /**
@@ -132,4 +133,25 @@ UserSchema.methods = {
   }
 };
 
+/**
+ * Statics
+ */
+
+UserSchema.statics = {
+
+  /**
+   * Load
+   *
+   * @param {Object} options
+   * @param {Function} cb
+   * @api private
+   */
+
+  load: function (options, cb) {
+    options.select = options.select || 'fullName username';
+    this.findOne(options.criteria)
+      .select(options.select)
+      .exec(cb);
+  }
+}
 mongoose.model('User', UserSchema);

@@ -12,7 +12,7 @@ html
     script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js')
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
   body
-    .navbar.navbar-default.navbar-fixed-top
+    header.navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
           button.navbar-toggle(type='button', data-toggle='collapsed',data-target='')
@@ -21,7 +21,34 @@ html
             span.icon-bar
             span.icon-bar
           a.navbar-brand.site(href='/') TripShare
-    main#main
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/')
+                span
+                  i.fa.fa-home
+                  |  Home
+          ul.nav.navbar-nav.navbar-right
+            - if(req.isAuthenticated()){
+              li.dropdown
+                a.dropdown-toggle.profile-link(href='#' data-toggle='dropdown')
+                  img.profile-icon(src='')
+                  |  #{req.user.username}
+                  b.caret
+                ul.dropdown-menu
+                  li.dropdown-header(role='presentation') My profile
+                  li
+                    a(href='#') My profile
+                  li.devider(role='presentation')
+                  li
+                    a(href='/users/logout') Logout
+            - } else {
+              li
+                a(href='/users/login') Login
+              li
+                a(href='/users/register') Register
+            - }
+main#wrap_content
       .container
         block content
     footer#footer
