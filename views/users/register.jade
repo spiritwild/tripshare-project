@@ -1,0 +1,45 @@
+extends ../layout.jade
+
+block content
+  .row
+    .col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading Register
+        .panel-body
+          form.form-horizontal(role='form', method='POST', action='/users/register')
+            .form-group
+              label.col-md-4.control-label Username
+              .col-md-6
+                input.form-control(type='text',required,name='username',placeholder='Please enter your username')
+            .form-group
+              label.col-md-4.control-label Email
+              .col-md-6
+                input.form-control(type='email',required, name='email', placeholder='Please enter your email')
+            .form-group
+              label.col-md-4.control-label Password
+              .col-md-6
+                input.form-control(type='password',required, name='password', placeholder='Please enter your password')
+            .form-group
+              label.col-md-4.control-label Re-type password
+              .col-md-6
+                input.form-control(type='password',required, name='password_confirmation', placeholder='Please re-type your password')
+            .form-group
+              label.col-md-4.control-label ID card
+              .col-md-6
+                input.form-control(type='text',required, name='id_card', placeholder='Please enter your id card')
+            .form-group
+              label.col-md-4.control-label Full name
+              .col-md-6
+                input.form-control(type='text',required, name='fullname',placeholder='Please enter your name')
+            .form-group
+              label.col-md-4.control-label Date of birth
+              .col-md-6
+                input.form-control(type='date',required, name='dob')
+            .form-group
+              label.col-md-4.control-label Address
+                input.form-control(type='text',required,name='address')
+            .form-group
+              .col-md-6.col-md-offset-4
+                button.btn.btn-success(type='submit')
+                  i.fa.fa-btn.fa-user
+                  |  Register

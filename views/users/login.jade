@@ -1,0 +1,24 @@
+extends ../layout.jade
+
+block content
+  .row
+    .col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading Login
+        .panel-body
+          form.form-horizontal(role='form', method='POST', action='/users/login')
+            input(type='hidden', name="_csrf", value="#{csrf_token}")
+            .form-group
+              label.col-md-4.control-label Username
+              .col-md-6
+                input.form-control(type='text',required,name='username',placeholder='Please enter your username')
+            .form-group
+              label.col-md-4.control-label Password
+              .col-md-6
+                input.form-control(type='password',required, name='password', placeholder='Please enter your password')
+            .form-group
+              .col-md-6.col-md-offset-4
+                button.btn.btn-success(type='submit')
+                  i.fa.fa-btn.fa-sign-in
+                  |  Login
+                a.btn.btn-link(href='/users/forgot-password') Forgot your password?
