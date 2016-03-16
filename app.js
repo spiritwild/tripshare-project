@@ -10,9 +10,8 @@ var csrf = require('csurf');
 var mongoStore = require('connect-mongo');
 var mongoose = require('mongoose');
 var conf = require('./config/settings');
+var fs = require('fs');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -43,8 +42,22 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/', routes);
-app.use('/users', users);
+// Connect to mongodb
+var connect = function () {
+  var options = {server: {socketOptions: {keepAlive: 1}}};
+  mongoose.connect(conf.get('database'), options);
+};
+connect();
+
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
+
+
+// Bootstrap models
+fs.readdirSync(__dirname + '/models').forEach(function (file) {
+  if (~file.indexOf('.js')) require(__dirname + '/models/' + file);
+});
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

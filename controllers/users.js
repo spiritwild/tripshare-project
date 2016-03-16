@@ -1,4 +1,6 @@
-'use strict';
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var utils = require('../libs/utils');
 
 exports.register = register;
 
