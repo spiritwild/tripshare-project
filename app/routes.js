@@ -19,6 +19,9 @@ module.exports = function (app, passport) {
   app.get('/users/forgot-password', usersController.getForgotPassword);
   app.post('/users/forgot-password', usersController.postForgotPassword);
 
+  app.get('/users/edit-profile', usersController.getEditProfile);
+  app.post('/users/edit-profile', usersController.postEditProfile);
+
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
     var err = new Error('Not Found');

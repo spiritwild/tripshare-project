@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  .row
+    .col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading Register
+        .panel-body
+          form.form-horizontal(role='form', method='POST', action='/users/edit-profile')
+            input(type='hidden', name="_csrf", value="#{csrf_token}")
+            .form-group
+              label.col-md-4.control-label Username
+              .col-md-6
+                input.form-control(type='text',required,name='username',value='#{user.username}',disabled)
+            .form-group
+              label.col-md-4.control-label Email
+              .col-md-6
+                input.form-control(type='email',required, name='email', value='#{user.email}',disabled)
+            .form-group
+              label.col-md-4.control-label ID card
+              .col-md-6
+                input.form-control(type='text',required, name='id_card', value='#{user.idCard}')
+            .form-group
+              label.col-md-4.control-label Full name
+              .col-md-6
+                input.form-control(type='text',required, name='fullname',value='#{user.fullName}')
+            .form-group
+              label.col-md-4.control-label Date of birth
+              .col-md-6
+                input.form-control(type='date',required, name='dob',value='#{user.dob}')
+            .form-group
+              label.col-md-4.control-label Address
+              .col-md-6
+                input.form-control(type='text',required,name='address',value='#{user.address}')
+            .form-group
+              label.col-md-4.control-label Phone number
+              .col-md-6
+                input.form-control(type='text',required,name='phone',value='#{user.phone}')
+            .form-group
+              .col-md-6.col-md-offset-4
+                button.btn.btn-success(type='submit')
+                  i.fa.fa-btn.fa-user
+                  |  Update

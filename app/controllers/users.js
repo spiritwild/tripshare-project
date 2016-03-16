@@ -76,8 +76,28 @@ exports.session = login;
  * Login
  */
 
-function login (req, res) {
+function login(req, res) {
   var redirectTo = req.session.returnTo ? req.session.returnTo : '/';
   delete req.session.returnTo;
   res.redirect(redirectTo);
 };
+
+exports.getEditProfile = function (req, res) {
+  var options = {
+    criteria: {username: req.user.username},
+    select: 'fullName username email dob address phone idCard'
+  }
+  User.load(options, function (err, user) {
+    if (err) {
+      return res.render('500')
+    }
+    console.log('aaaaaa');
+
+    return res.render('users/profile', {user: user})
+  })
+  //res.render('users/profile', {user: req.user});
+}
+
+exports.postEditProfile = function (req, res) {
+
+}
